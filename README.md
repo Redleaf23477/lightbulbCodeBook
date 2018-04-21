@@ -1,4 +1,4 @@
-# myCodeBook
+# lightbulb CodeBook
 ## Math
 - prime detection
 - exgcd
