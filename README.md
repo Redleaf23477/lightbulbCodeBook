@@ -40,3 +40,4 @@
 - Trie
 - KMP
 - Z Value
+- Suffix Array + Longest Common Prefix
