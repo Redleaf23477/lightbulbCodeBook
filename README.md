@@ -17,7 +17,7 @@
 - binary index tree
 - 2d segment tree
 - merge spilt treap
-- heavy light decomposition
+- heavy light decomposition + lca
 ## Graph
 - topological sort
 - euler sort
