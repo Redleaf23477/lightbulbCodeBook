@@ -1,48 +1,79 @@
-void cal_subsz(int v, int p)
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long int ll;
+typedef pair<int, ll> P;
+#define idx first
+#define w second
+
+const int N = 10004;
+const ll INF = (1ll << 60);
+
+int vn;
+ll k;
+vector<P> graph[N];
+vector<int> dist;
+ll subtreeSz[N];
+bool isCentroid[N];
+
+void init()
 {
-    ll s = 1;
-    for(int i = 0; i < graph[v].size(); i++)
-    {
-        int c = graph[v][i].idx;
-        if(c == p || iscentroid[c]) continue;
-        cal_subsz(c, v);
-        s += subsz[c];
-    }
-    subsz[v] = s;
+    for(int i = 1; i <= vn; i++) graph[i].clear(), isCentroid[i] = false;
 }
 
-Edge find_centroid(int v, int p, const ll sz)
+void buildTree()
 {
-    Edge cen(-1, INF);
-    ll mxsz = -1;
-    for(int i = 0; i < graph[v].size(); i++)
+    for(int i = 1; i < vn; i++)
     {
-        int c = graph[v][i].idx; 
-        if(c == p || iscentroid[c]) continue;
-        Edge res = find_centroid(c, v, sz);
-        if(res.w < cen.w) cen = res;
-        mxsz = max(mxsz, subsz[c]);
+        int u, v, l; scanf("%d %d %d", &u, &v, &l);
+        graph[u].push_back(P(v, l));
+        graph[v].push_back(P(u, l));
     }
-    mxsz = max(mxsz, sz-subsz[v]);
-    if(mxsz < cen.w) cen.idx = v, cen.w = mxsz;
+}
+
+ll calSubsz(int v, int p)
+{
+    subtreeSz[v] = 1;
+    for(auto c:graph[v])
+    {
+        if(isCentroid[c.idx] || c.idx == p) continue;
+        subtreeSz[v] += calSubsz(c.idx, v);
+    }
+    return subtreeSz[v];
+}
+
+
+P getCentroid(int v, int p, ll subsz)
+{
+    P cen(-1, INF);
+    ll mxsonSz = -1;
+    for(auto c:graph[v])
+    {
+        if(c.idx == p || isCentroid[c.idx]) continue;
+        P res = getCentroid(c.idx, v, subsz);
+        if(res.w < cen.w) cen = res;
+        mxsonSz = max(mxsonSz, subtreeSz[c.idx]); 
+    }
+    mxsonSz = max(mxsonSz, subsz-subtreeSz[v]);
+    if(mxsonSz < cen.w) cen = P(v, mxsonSz);
     return cen;
 }
 
-void get_dist(int v, int p, ll w)
+void getDist(int v, int p, ll w)
 {
+    if(w > k) return;
     dist.push_back(w);
-    for(int i = 0; i < graph[v].size(); i++)
+    for(auto c:graph[v])
     {
-        int c = graph[v][i].idx;
-        if(c == p || iscentroid[c]) continue;
-        get_dist(c, v, w+graph[v][i].w);
+        if(c.idx == p || isCentroid[c.idx]) continue;
+        getDist(c.idx, v, w+c.w);
     }
 }
 
-ll cal_pair(int idx, ll w)
+ll calValidPair(int idx, ll w)
 {
     dist.clear();
-    get_dist(idx, -1, w);
+    getDist(idx, -1, w);
     sort(dist.begin(), dist.end());
     ll sum = 0;
     for(int l = 0, r = dist.size()-1; l < r; )
@@ -53,24 +84,31 @@ ll cal_pair(int idx, ll w)
     return sum;
 }
 
-ll tree_dc(int v)
+ll treedc(int v)
 {
     ll sum = 0;
     // find centroid
-    cal_subsz(v, -1);
-    int centroid = find_centroid(v, -1, subsz[v]).idx;
-    iscentroid[centroid] = true;
-    // cal result
-    sum += cal_pair(centroid, 0);
-    // for ever subtree
-    for(int i = 0; i < graph[centroid].size(); i++)
+    calSubsz(v, v);
+    int cen = getCentroid(v, v, subtreeSz[v]).idx;
+    isCentroid[cen] = true;
+    
+    sum += calValidPair(cen, 0);
+    for(auto c:graph[cen])
     {
-        int c = graph[centroid][i].idx; ll w = graph[centroid][i].w;
-        if(iscentroid[c]) continue;
-        // cal res
-        sum -= cal_pair(c, w);
-        // dc
-        sum += tree_dc(c);
+        if(isCentroid[c.idx]) continue;
+        sum -= calValidPair(c.idx, c.w);
+        sum += treedc(c.idx);
     }
     return sum;
+}
+
+int main()
+{
+    while(scanf("%d %lld", &vn, &k) && vn && k)
+    {
+        init();
+        buildTree();
+        printf("%lld\n", treedc(1));
+    }
+    return 0;
 }
