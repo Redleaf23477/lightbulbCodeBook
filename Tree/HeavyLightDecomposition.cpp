@@ -1,45 +1,52 @@
-#include<vector>
-#define MAXN 100005
-typedef std::vector<int >::iterator VIT;
-int siz[MAXN],max_son[MAXN],pa[MAXN],dep[MAXN];
-/*節點大小、節點大小最大的孩子、父母節點、深度*/
-int link_top[MAXN],link[MAXN],cnt;
-/*每個點所在鏈的鏈頭、樹鏈剖分的DFS序、時間戳*/
-std::vector<int >G[MAXN];/*用vector存樹*/
-void find_max_son(int x){
-	siz[x]=1;
-	max_son[x]=-1;
-	for(VIT i=G[x].begin();i!=G[x].end();++i){
-		if(*i==pa[x])continue;
-		pa[*i]=x;
-		dep[*i]=dep[x]+1;
-		find_max_son(*i);
-		if(max_son[x]==-1||siz[*i]>siz[max_son[x]])max_son[x]=*i;
-		siz[x]+=siz[*i];
+const int MAX_N;
+vector<int> link[MAX_N]; //edge
+
+void dfs_build(int now, int fa, int *weight, int *depth, int *pa, int *son)
+{
+	weight[now]=1;
+	son[now]=-1;
+	pa[now]=fa;
+	for(auto i:link[now])
+	{
+		if(i==fa) continue;
+		depth[i]=depth[now]+1;
+		dfs_build(i,now,weight,depth,pa,son);
+		if(son[now]==-1||weight[son[now]]<weight[i]) son[now]=i;
+		weight[now]+=weight[i];
 	}
 }
-void build_link(int x,int top){
-	link[x]=++cnt;/*記錄x點的時間戳*/
-	link_top[x]=top;
-	if(max_son[x]==-1)return;
-	build_link(max_son[x],top);/*優先走訪最大孩子*/
-	for(VIT i=G[x].begin();i!=G[x].end();++i){
-		if(*i==max_son[x]||*i==pa[x])continue;
-		build_link(*i,*i);
+void build_top(int now, int top,int *pa, int *son, int *link_top)
+{
+	link_top[now]=top;
+	if(son[now]==-1) return;
+	build_top(son[now],top,pa,son,link_top);
+	for(auto i:link[now])
+	{
+		if(i==son[now]||i==pa[now]) continue;
+		build_top(i,i,pa,son,link_top);
 	}
 }
-inline int find_lca(int a,int b){
-	/*求LCA，可以在過程中對區間進行處理*/
-	int ta=link_top[a],tb=link_top[b];
-	while(ta!=tb){
-		if(dep[ta]<dep[tb]){
-			std::swap(ta,tb);
-			std::swap(a,b);
+inline void HLD(int *weight, int *depth, int *pa, int *son, int *link_top)
+{
+	memset(son,-1,sizeof(int)*MAX_N);
+	depth[1]=1; //set node(1) as root
+	dfs_build(1,0,weight,depth,pa,son);
+	build_top(1,1,pa,son,link_top);
+}
+inline int find_lca(int x, int y, int *depth, int *pa, int *link_top)
+{
+	int tx=link_top[x], ty=link_top[y];
+	while(tx!=ty)
+	{
+		if(depth[tx]<depth[ty])
+		{
+			swap(tx,ty);
+			swap(x,y);
 		}
-		//這裡可以對a所在的鏈做區間處理 
-		//區間為(link[ta],link[a])
-		ta=link_top[a=pa[ta]];
+		tx=link_top[x=pa[x]];
 	}
-	/*最後a,b會在同一條鏈，若a!=b還要在進行一次區間處理*/
-	return dep[a]<dep[b]?a:b;
+	return depth[x]<depth[y]?x:y;
 }
+//usage: 
+//build HeavyLightDecomposition: HLD
+//find LCA(x,y): find_lca
