@@ -18,7 +18,8 @@ bool isCentroid[N];
 
 void init()
 {
-    for(int i = 1; i <= vn; i++) graph[i].clear(), isCentroid[i] = false;
+    for(int i = 1; i <= vn; i++) 
+        graph[i].clear(), isCentroid[i] = false;
 }
 
 void buildTree()
