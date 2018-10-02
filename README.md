@@ -4,6 +4,8 @@
 - exgcd
 - 線性模方程組
 - matrix and determinant
+- FFT
+- NTT
 - Big Integer
 ## Computational Geometry
 - operators
