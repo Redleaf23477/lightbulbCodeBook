@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.13)  25 NOV 2018 00:25
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.13)  25 NOV 2018 00:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1426,7 +1426,7 @@ LaTeX Font Warning: Font shape `TU/MicrosoftJhengHei(0)/bx/n' undefined
 (./Math/BigInteger.cpp [11]) (./Math/prime_detect.cpp)
 (./Math/GaussianJordan.cpp) (./Math/modeq.cpp [12]) (./Math/FFT.cpp)
 (./String/hash.cpp) (./String/SuffixArray-STL.cpp) (./String/Z-value.cpp)
-(./String/BWT.cpp) (./String/LCP.cpp [13]) (./String/SuffixArray.cpp)
+(./String/BWT.cpp) (./String/LCP.cpp) [13] (./String/SuffixArray.cpp)
 (./String/AC-Automation.cpp) (./String/KMP.cpp) (./other/2sat.cpp)
 (./other/PojTree.cpp [14]) (./other/definesss.cpp)) [15] (./Codebook.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 2.
@@ -1449,10 +1449,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 24344 strings out of 494988
- 459676 string characters out of 6178637
- 1204035 words of memory out of 5000000
- 27826 multiletter control sequences out of 15000+600000
+ 24342 strings out of 494988
+ 459672 string characters out of 6178637
+ 1214035 words of memory out of 5000000
+ 27824 multiletter control sequences out of 15000+600000
  532171 words of font info for 55 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  46i,12n,65p,10409b,2051s stack positions out of 5000i,500n,10000p,200000b,80000s
