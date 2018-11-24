@@ -12,7 +12,7 @@
 - 有向面積
 - 極角排序
 - 凸包
-## Tree
+## Data Sturcture
 - disjoint set
 - disjoint set (union by rank)
 - 1d segment tree
@@ -20,6 +20,8 @@
 - binary index tree
 - 2d segment tree
 - merge spilt treap
+- matrix(from 130e08e)
+## Tree
 - heavy light decomposition + lca
 ## Graph
 - topological sort
@@ -30,6 +32,7 @@
 - shortest path (dijkstra)
 - shortest path (bellman)
 - shortest path (spfa)
+- Tarjan系列(130e08e)
 ## Flow
 - Maximum Flow
 - Minimum Cost Flow
