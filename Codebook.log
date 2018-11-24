@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.13)  21 NOV 2018 10:32
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Debian) (preloaded format=xelatex 2018.10.13)  25 NOV 2018 00:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1394,33 +1394,44 @@ Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 99.
 * 
 * Try to use `\setCJKmonofont[...]{...}' to define it.
 *************************************************
-(./ComputationalGeometry/operators.cpp) (./ComputationalGeometry/inter_par.cpp
+(./DataStructure/treap.cpp) (./DataStructure/disjoint_set.cpp)
+(./DataStructure/2d_st_tag.cpp
 
 LaTeX Font Warning: Font shape `TU/MicrosoftJhengHei(0)/m/it' undefined
-(Font)              using `TU/MicrosoftJhengHei(0)/m/n' instead on input line 6
+(Font)              using `TU/MicrosoftJhengHei(0)/m/n' instead on input line 1
 .
 
-) (./DivideConquer/PojTree.cpp [1
+[1
 
-]) (./DivideConquer/nearestDist.cpp)
-(./Flow/dinic.cpp [2]) (./Flow/minCostMaxFlow.cpp [3])
-(./Graph/floyd_warshall.cpp) (./Graph/mst_prim.cpp) (./Graph/mst_kruskal.cpp)
-(./Graph/bellman_Ford.cpp [4]) (./Graph/dijkstra.cpp) (./Graph/spfa.cpp)
-(./Math/exgcd.cpp) (./Math/NTT.cpp [5]) (./Math/BigInteger.cpp [6] [7])
-(./Math/prime_detect.cpp) (./Math/modeq.cpp) (./Math/FFT.cpp)
-(./String/SuffixArray-STL.cpp) [8] (./String/Z-value.cpp) (./String/LCP.cpp)
-(./String/SuffixArray.cpp) (./String/KMP.cpp) (./Tree/treap.cpp [9])
-(./Tree/HeavyLightDecomposition.cpp) (./Tree/disjoint_set.cpp [10])
-(./Tree/2d_st_tag.cpp [11]) (./Tree/BIT.cpp) (./Tree/1d_segTree_tag.cpp
-[12]) (./Tree/1d_segTree.cpp)) [13]
+]) (./DataStructure/BIT.cpp) (./DataStructure/1d_segTree_tag.cpp)
+(./DataStructure/1d_segTree.cpp [2]) (./DataStructure/Matrix.cpp)
+(./DataStructure/undo_disjoint_set.cpp) (./Flow/dinic.cpp) [3]
+(./Flow/MaxDensitySubgraph.cpp) (./Flow/MinCostMaxFlow.cpp [4])
+(./Geometry/nearestDist.cpp) (./Geometry/SegmentGeometry.cpp [5])
+(./Graph/floyd_warshall.cpp) (./Graph/mst_prim.cpp)
+(./Graph/HeavyLightDecomposition.cpp)
 
-LaTeX Font Warning: Font shape `TU/MicrosoftJhengHei(0)/m/sc' undefined
-(Font)              using `TU/MicrosoftJhengHei(0)/m/n' instead on input line 1
-06.
+LaTeX Font Warning: Font shape `TU/MicrosoftJhengHei(0)/bx/n' undefined
+(Font)              using `TU/MicrosoftJhengHei(0)/m/n' instead on input line 2
+1.
 
-(./Codebook.toc
+(./Graph/匹配問題轉換.tex) (./Graph/TarjanBridge.cpp) (./Graph/BridgeConnected.cpp
+[6]) (./Graph/mst_kruskal.cpp) (./Graph/bellman_Ford.cpp)
+(./Graph/MaxWeightPerfectMatch.cpp) (./Graph/StronglyConnectedComponent.cpp
+[7]) (./Graph/MaxBiMatching.cpp) (./Graph/dijkstra.cpp)
+(./Graph/TwoConnected.cpp) (./Graph/ArticulationPoint.cpp)
+(./Graph/MaxWeightPerfectBiMatch.cpp [8]) (./Graph/MaximalClique.cpp)
+(./Graph/MaxMatching.cpp [9]) (./Graph/spfa.cpp) (./Graph/MinimumMeanCycle.cpp)
+(./Math/EulerPhi.cpp) [10] (./Math/exgcd.cpp) (./Math/NTT.cpp)
+(./Math/BigInteger.cpp [11]) (./Math/prime_detect.cpp)
+(./Math/GaussianJordan.cpp) (./Math/modeq.cpp [12]) (./Math/FFT.cpp)
+(./String/hash.cpp) (./String/SuffixArray-STL.cpp) (./String/Z-value.cpp)
+(./String/BWT.cpp) (./String/LCP.cpp [13]) (./String/SuffixArray.cpp)
+(./String/AC-Automation.cpp) (./String/KMP.cpp) (./other/2sat.cpp)
+(./other/PojTree.cpp [14]) (./other/definesss.cpp)) [15] (./Codebook.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 2.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 2.
@@ -1431,19 +1442,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write3
 \openout3 = `Codebook.toc'.
 
- [14]
+ [16]
 (./Codebook.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 23892 strings out of 494988
- 452528 string characters out of 6178637
- 1079035 words of memory out of 5000000
- 27437 multiletter control sequences out of 15000+600000
+ 24344 strings out of 494988
+ 459676 string characters out of 6178637
+ 1204035 words of memory out of 5000000
+ 27826 multiletter control sequences out of 15000+600000
  532171 words of font info for 55 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 46i,12n,65p,10409b,1967s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,12n,65p,10409b,2051s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Codebook.pdf (14 pages).
+Output written on Codebook.pdf (16 pages).

@@ -1,10 +1,10 @@
 vector<int> G[MAXN];
-vector<int> bcc[MAXN]; // bcc¤ºªºÂI
-
+vector<int> bcc[MAXN]; // bccå…§çš„é»ž
+ 
 int dfn[MAXN], low[MAXN], tim, ans;
 int st[MAXN], top;
-int bccID[MAXN], bcc_cnt;// ¨C­ÓÂIªºbcc½s¸¹
-bool is_cut[MAXN]; // ¬O§_¬°³ÎÂI, ³ÎÂIªºID·|³QÂÐ»\
+int bccID[MAXN], bcc_cnt;// æ¯å€‹é»žçš„bccç·¨è™Ÿ
+bool is_cut[MAXN]; // æ˜¯å¦ç‚ºå‰²é»ž, å‰²é»žçš„IDæœƒè¢«è¦†è“‹
 
 void tarjan(int u, int p){ // p->u
     int child= 0, w;

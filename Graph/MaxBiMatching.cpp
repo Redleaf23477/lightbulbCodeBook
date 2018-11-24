@@ -1,4 +1,4 @@
-//ª`·NÅÜ¼ÆV
+//æ³¨æ„: è®Šæ•¸V
 #define MAXV 505
 int V;//# of vertex
 vector<int> G[MAXV];
