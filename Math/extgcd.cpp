@@ -1,4 +1,3 @@
-//維護a*x+b*y=gcd(a, b)
 int extgcd(int a, int b, int &x, int &y)
 {
 	int gcd = a;
@@ -10,4 +9,4 @@ int extgcd(int a, int b, int &x, int &y)
 	else x = 1, y = 0;
 	return gcd;
 }
-
+//維護a*x+b*y=gcd(a, b)
