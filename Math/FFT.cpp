@@ -34,3 +34,6 @@ inline vector<Complex> fft(vector<Complex> rtn, int Rev = 1)
 		rtn[i].x = rtn[i].x/fft_n;
 	return rtn;
 }
+// Complex的x為實部, y為虛部.
+// 把原多項式包成Complex的vector(poly), 並把項次拓展到2^i, 用fft(poly)即可得到轉換後的結果.
+// Rev為1時為FFT, 為-1時為InvFFT.
