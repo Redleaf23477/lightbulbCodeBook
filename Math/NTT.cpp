@@ -43,3 +43,6 @@ inline vector<ll> ntt(vector<ll> rtn, int Rev = 1)
 	}
 	return rtn;
 }
+// 把原多項式包成long long的vector(poly), 並把項次拓展到2^i.
+// 用ntt(poly)即可得到轉換後的結果.
+// Rev為1時為NTT, 為-1時為InvNTT.
