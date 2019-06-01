@@ -13,4 +13,4 @@ vector<Point> interCir(Point o1, double r1, Point o2, double r2)
 	Point v_up=(Point){v.x*c-v.y*s,v.x*s+v.y*c};
 	Point v_down=(Point){v.x*c+v.y*s,-v.x*s+v.y*c};
 	return {o1+v_up,o1+v_down};
-} // ¨â¶ê¥æÂI 
+} // æ±‚å…©åœ“äº¤é»ž

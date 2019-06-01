@@ -26,11 +26,11 @@ struct Point{
 	}
 	Point normal()const{  
 		return Point(-y,x); 
-	} // ¨Dªk¦V¶q
+	} // æ±‚æ³•å‘é‡
 	double abs2()const{
 		return dot(*this); 
-	} // ¦V¶qªø«×ªº¥­¤è
+	} // å‘é‡é•·åº¦çš„å¹³æ–¹
 	double rad(const Point b)const{ 
 		return fabs(atan2(fabs(cross(b)),dot(b))); 
-	} // ¨â¦V¶qªº©·«×
+	} // å…©å‘é‡çš„å¼§åº¦
 };
