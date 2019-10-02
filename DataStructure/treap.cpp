@@ -1,65 +1,100 @@
-struct Treap
-{
+struct Treap {
     int pri, sz;
     int rev;
-    ll data, sum;   // tag: make-same
-    Treap *lchild, *rchild;
-    Treap(ll d):pri(rand()), sz(1), rev(0), data(d), sum(d), lchild(NULL), rchild(NULL)
-    {
-    }
+    ll data, tag;   // tag: make-same
+    Treap *l, *r;
+    Treap(ll d):pri(rand()), sz(1), rev(0), data(d), tag(INF), l(NULL), r(NULL) {}
     inline void up();
     inline void down();
 }; 
 
-inline int size(Treap *t) { return t? t->sz:0; }
-inline ll get_data(Treap *t) { return t? t->data:0; }
-inline ll get_sum(Treap *t) { return t? t->sum:0; }
+int size(Treap *t) { return t? t->sz:0; }
+ll get_data(Treap *t) { return t? t->data:0; }
 
-inline void Treap::up(){
-    if(lchild) lchild->down();
-    if(rchild) rchild->down();
-    sz = 1+size(lchild)+size(rchild);
-    sum = get_sum(lchild) + data + get_sum(rchild);
+void Treap::up() {
+    if(l) l->down();
+    if(r) r->down();
+    sz = 1+size(l)+size(r);
 }
-
-inline void Treap::down(){
-    if(rev){
-        swap(mxpre, mxpost);
-        swap(lchild, rchild);
-        if(lchild) lchild->rev ^= 1;
-        if(rchild) rchild->rev ^= 1;
+void Treap::down() {
+    if(tag != INF) {
+        data = tag;
+        if(l) l->tag = tag;
+        if(r) r->tag = tag;
+        tag = INF;
+    }
+    if(rev) {
+        swap(l, r);
+        if(l) l->rev ^= 1;
+        if(r) r->rev ^= 1;
         rev ^= 1;
     }
 }
-
-Treap *merge(Treap *a, Treap *b){
+void freeTreap(Treap *t) {
+    if(!t) return;
+    if(t->l) freeTreap(t->l);
+    if(t->r) freeTreap(t->r);
+    delete t;
+}
+Treap *merge(Treap *a, Treap *b) {
     if(!a || !b) return (a? a:b);
-    if(a->pri < b->pri){
+    if(a->pri < b->pri) {
         a->down();
-        a->rchild = merge(a->rchild, b);
+        a->r = merge(a->r, b);
         a->up();
         return a;
-    }
-    else{
+    } else {
         b->down();
-        b->lchild = merge(a, b->lchild);
+        b->l = merge(a, b->l);
         b->up();
         return b;
     }
 }
-
-void split(Treap *o, Treap *&a, Treap *&b, int k){
+void split(Treap *o, Treap *&a, Treap *&b, int k) {
     if(!o) a = b = NULL;
-    else{
+    else {
         o->down();
-        if(k >= size(o->lchild)+1){
+        if(k >= size(o->l)+1) {
             a = o;
-            split(o->rchild, a->rchild, b, k-size(o->lchild)-1);
-        }
-        else {
+            split(o->r, a->r, b, k-size(o->l)-1);
+        } else {
             b = o;
-            split(o->lchild, a, b->lchild, k);
+            split(o->l, a, b->l, k);
         }
         o->up();
     }
+}
+
+Treap* buildTreap(vector<int> &arr) {
+    srand(7122+time(NULL));
+    Treap *tp = NULL;
+    for(auto x : arr)
+        tp = merge(tp, new Treap(x));
+    return tp;
+}
+void ins(Treap *&tp, int pos, int x) {
+    Treap *a, *b;
+    split(tp, a, b, pos);
+    tp = merge(a, merge(new Treap(x), b));
+}
+void del(Treap *&tp, int pos, int k) {
+    Treap *a, *b, *c;
+    split(tp, a, b, pos-1);
+    split(b, b, c, k);
+    freeTreap(b);
+    tp = merge(a, c);
+}
+void makeSame(Treap *tp, int pos, int k, int val) {
+    Treap *a, *b, *c;
+    split(tp, a, b, pos-1);
+    split(b, b, c, k);
+    b->tag = val;
+    tp = merge(a, merge(b, c));
+}
+void rev(Treap *&tp, int pos, int k) {
+    Treap *a, *b, *c;
+    split(tp, a, b, pos-1);
+    split(b, b, c, k);
+    b->rev ^= 1;
+    tp = merge(a, merge(b, c));
 }
