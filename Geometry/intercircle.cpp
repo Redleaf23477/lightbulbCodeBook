@@ -1,5 +1,4 @@
-vector<Point> interCir(Point o1, double r1, Point o2, double r2)
-{
+vector<Point> interCir(Point o1, double r1, Point o2, double r2){
 	double d=sqrt((o1-o2).abs2());
 	double c=(r1*r1 + d*d - r2*r2)/2.0/r1/d;
 	double s=sqrt(1.0-c*c);

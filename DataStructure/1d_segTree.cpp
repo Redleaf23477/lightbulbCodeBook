@@ -1,7 +1,6 @@
 void buildst(int l, int r, int idx)  //l, r是st的區間
 {
-    if(l == r)
-    {
+    if(l == r){
         st[idx] = arr[l];
         return;
     }
@@ -22,8 +21,7 @@ ll query(int l, int r, int idx, int L, int R)  //L,R是操作的區間
 void modify(int l, int r, int idx, int x, int v)
 {
     if(r < x || x < l) return;
-    if(l == r)
-    {
+    if(l == r){
         st[idx] += v; return;
     }
     int mid = (l+r)/2;

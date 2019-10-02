@@ -1,11 +1,7 @@
-int extgcd(int a, int b, int &x, int &y)
-{
+int extgcd(int a, int b, int &x, int &y){
 	int gcd = a;
-	if(b != 0) 
-	{
-		gcd = extgcd(b, a%b, y, x);
-		y -= (a/b)*x;
-	}
+	if(b != 0)
+		gcd = extgcd(b, a%b, y, x), y -= (a/b)*x;
 	else x = 1, y = 0;
 	return gcd;
 }

@@ -1,5 +1,4 @@
-void SA_radix_sort(int *s, int *e, int *Rank, int rankcnt)
-{
+void SA_radix_sort(int *s, int *e, int *Rank, int rankcnt){
 	int box[MAX_N], tmp[MAX_N], len=e-s;
 	memset(box,0,sizeof(int)*rankcnt);
 	for(int i=0;i<len;i++) box[Rank[i]]++;
@@ -8,12 +7,10 @@ void SA_radix_sort(int *s, int *e, int *Rank, int rankcnt)
 	for(int i=0;i<len;i++) s[i]=tmp[i];
 }
 #define equal(a,b,c) c[a]!=c[b]||a+k>=len||c[a+k]!=c[b+k]
-void SA_build(int *SA, int *Rank, char *S)
-{
+void SA_build(int *SA, int *Rank, char *S){
 	int ranktmp[MAX_N], len=strlen(S), rankcnt='z'+1;
 	for(int i=0;i<len;i++) Rank[i]=S[i];
-	for(int k=1;rankcnt!=len;k*=2)
-	{
+	for(int k=1;rankcnt!=len;k*=2){
 		for(int i=0;i<len;i++) SA[i]=(i+len-k)%len;
 		SA_radix_sort(SA+k, SA+len, Rank+k, rankcnt);
 		SA_radix_sort(SA, SA+len, Rank, rankcnt);

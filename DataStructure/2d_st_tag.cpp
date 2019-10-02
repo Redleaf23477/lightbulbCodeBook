@@ -11,13 +11,11 @@ public:
     void down(int idx);
 };
 
-void St1d::build()
-{
+void St1d::build(){
     memset(st, 0, sizeof(st));
 }
 
-void St1d::modify(int l, int r, int idx, int L, int R, ll v)
-{
+void St1d::modify(int l, int r, int idx, int L, int R, ll v){
     if(r < L || R < l) return;
     if(L <= l && r <= R)
     {
@@ -31,8 +29,7 @@ void St1d::modify(int l, int r, int idx, int L, int R, ll v)
     modify(mid+1, r, idx*2+1, L, R, v);
 }
 
-ll St1d::query(int l, int r, int idx, int x)
-{
+ll St1d::query(int l, int r, int idx, int x){
     if(x < l || r < x) return 0;
     if(l == x && r == x) return st[idx];
     down(idx);
@@ -42,8 +39,7 @@ ll St1d::query(int l, int r, int idx, int x)
     return left+right;
 }
 
-void St1d::down(int idx)
-{
+void St1d::down(int idx){
     st[idx*2] += st[idx], st[idx*2+1] += st[idx];
     st[idx] = 0;
 }
@@ -61,8 +57,7 @@ public:
     ll query(int il, int ir, int jl, int jr, int idx, int i, int j);
 };
 
-void St2d::build(int il, int ir, int idx)
-{
+void St2d::build(int il, int ir, int idx){
     st[idx].build();
     if(il == ir) return;
     int mid = (il+ir)/2;
@@ -70,11 +65,9 @@ void St2d::build(int il, int ir, int idx)
     build(mid+1, ir, idx*2+1);
 }
 
-void St2d::modify(int il, int ir, int jl, int jr, int idx, int iL, int iR, int jL, int jR, ll v)
-{
+void St2d::modify(int il, int ir, int jl, int jr, int idx, int iL, int iR, int jL, int jR, ll v){
     if(ir < iL || iR < il) return;
-    if(iL <= il && ir <= iR)
-    {
+    if(iL <= il && ir <= iR){
         st[idx].modify(jl, jr, 1, jL, jR, v); return;
     }
     int mid = (il+ir)/2;
@@ -82,8 +75,7 @@ void St2d::modify(int il, int ir, int jl, int jr, int idx, int iL, int iR, int j
     modify(mid+1, ir, jl, jr, idx*2+1, iL, iR, jL, jR, v);
 }
 
-ll St2d::query(int il, int ir, int jl, int jr, int idx, int i, int j)
-{
+ll St2d::query(int il, int ir, int jl, int jr, int idx, int i, int j){
     ll tot = 0;
     if(i < il || ir < i) return 0;
     if(il <= i && i <= ir) tot += st[idx].query(jl, jr, 1, j);

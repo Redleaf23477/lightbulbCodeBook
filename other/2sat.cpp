@@ -11,8 +11,7 @@ int not(int a) {return a&1 ? a : a+1;}
 int not(int a) {return a^1;}
 */
  
-bool dfs_try(int i)
-{
+bool dfs_try(int i){
     if (visit[i] == 1 || sat[i] == 1) return true;
     if (visit[i] == 2 || sat[i] == 2) return false;
     visit[i] = 1;
@@ -23,8 +22,7 @@ bool dfs_try(int i)
     return true;
 }
  
-void dfs_mark(int i)
-{
+void dfs_mark(int i){
     if (sat[i] == 1) return;
     sat[i] = 1;
     sat[not(i)] = 2;
@@ -33,20 +31,17 @@ void dfs_mark(int i)
             dfs_mark(j);
 }
  
-void two_satisfiability()
-{
+void two_satisfiability(){
     // 一次輸入一個括號
     memset(adj, false, sizeof(adj));
     int a, b;
-    while (cin >> a >> b)
-    {
+    while (cin >> a >> b){
         map[not(a)][b] = true;
         map[not(b)][a] = true;
     }
  
     // 找出一組解
-    for (int i=0; i<N; ++i)
-    {
+    for (int i=0; i<N; ++i){
         memset(visit, 0, sizeof(visit));
         if (dfs_try(i)) {dfs_mark(i); continue;}
  

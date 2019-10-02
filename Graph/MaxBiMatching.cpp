@@ -5,20 +5,16 @@ vector<int> G[MAXV];
 int match[MAXV];
 int used[MAXV];
 
-void add_edge(int u, int v)
-{
+void add_edge(int u, int v){
     G[u].pb(v);
     G[v].pb(u);
 }
 
-bool dfs(int u)
-{
+bool dfs(int u){
     used[u]=true;
-    for(int i = 0; i < G[u].size(); i++)
-    {
+    for(int i = 0; i < G[u].size(); i++){
         int v = G[u][i], w = match[v];
-        if(w<0 || !used[w]&&dfs(w) )
-        {
+        if(w<0 || !used[w]&&dfs(w) ){
             match[u]=v;
             match[v]=u;
             return true;
@@ -27,14 +23,11 @@ bool dfs(int u)
     return false;
 }
 
-int bip_match()
-{
+int bip_match(){
     int res=0;
     memset(match,-1,sizeof(match));
-    for(int v=0; v<V; v++)
-    {
-        if(match[v]<0)
-        {
+    for(int v=0; v<V; v++){
+        if(match[v]<0){
             memset(used,0,sizeof(used));
             if(dfs(v))res++;
         }

@@ -18,38 +18,31 @@ private:
     vector<pair<int,int>> Bridge;
     vector<vector<int>> BCC;
     void reportAP(int ap) { AP.emplace_back(ap); }
-    void reportBiCC(int v)
-    {
+    void reportBiCC(int v){
         vector<int> block(1, v);
-        while(biccStk.top() != v) 
-        {
+        while(biccStk.top() != v) {
             block.emplace_back(biccStk.top()); biccStk.pop();
         }
         BiCC.emplace_back(block);
     }
     void reportBridge(int u, int v) { Bridge.emplace_back(u, v); }
-    void reportBCC(int v)
-    {
+    void reportBCC(int v){
         vector<int> bcc;
         int x;
-        do
-        {
+        do{
             x = bccStk.top(); bccStk.pop();
             bcc.emplace_back(x);
         } while(x != v);
         BCC.emplace_back(bcc);
     }
-    void dfs(int v, int p)
-    {
+    void dfs(int v, int p){
         int childNum = 0;
         bool maybeAP = false;
         low[v] = dep[v] = ++ts;
         biccStk.push(v), bccStk.push(v);
-        for(auto c : graph[v])
-        {
+        for(auto c : graph[v]){
             if(c == p) continue;
-            if(dep[c] == 0) // not visited
-            {
+            if(dep[c] == 0){// not visited
                 childNum++;
                 dfs(c, v);
                 low[v] = min(low[v], low[c]);
@@ -64,20 +57,17 @@ private:
         if(v != p && maybeAP) reportAP(v);
     }
 public:
-    void init(int v)
-    {
+    void init(int v){
         vn = v, ts = 0;
         graph.resize(v);
         low.resize(v, 0);
         dep.resize(v, 0);
     }
-    void addEdge(int u, int v)
-    {
+    void addEdge(int u, int v){
         graph[u].emplace_back(v);
         graph[v].emplace_back(u);
     }
-    void run()
-    {
+    void run(){
         for(int i = 0; i < vn; i++)
             if(dep[i] == 0) dfs(i, i);
     }

@@ -16,27 +16,22 @@ vector<int> dist;
 ll subtreeSz[N];
 bool isCentroid[N];
 
-void init()
-{
+void init(){
     for(int i = 1; i <= vn; i++) 
         graph[i].clear(), isCentroid[i] = false;
 }
 
-void buildTree()
-{
-    for(int i = 1; i < vn; i++)
-    {
+void buildTree(){
+    for(int i = 1; i < vn; i++){
         int u, v, l; scanf("%d %d %d", &u, &v, &l);
         graph[u].push_back(P(v, l));
         graph[v].push_back(P(u, l));
     }
 }
 
-ll calSubsz(int v, int p)
-{
+ll calSubsz(int v, int p){
     subtreeSz[v] = 1;
-    for(auto c:graph[v])
-    {
+    for(auto c:graph[v]){
         if(isCentroid[c.idx] || c.idx == p) continue;
         subtreeSz[v] += calSubsz(c.idx, v);
     }
@@ -44,12 +39,10 @@ ll calSubsz(int v, int p)
 }
 
 
-P getCentroid(int v, int p, ll subsz)
-{
+P getCentroid(int v, int p, ll subsz){
     P cen(-1, INF);
     ll mxsonSz = -1;
-    for(auto c:graph[v])
-    {
+    for(auto c:graph[v]){
         if(c.idx == p || isCentroid[c.idx]) continue;
         P res = getCentroid(c.idx, v, subsz);
         if(res.w < cen.w) cen = res;
@@ -60,33 +53,28 @@ P getCentroid(int v, int p, ll subsz)
     return cen;
 }
 
-void getDist(int v, int p, ll w)
-{
+void getDist(int v, int p, ll w){
     if(w > k) return;
     dist.push_back(w);
-    for(auto c:graph[v])
-    {
+    for(auto c:graph[v]){
         if(c.idx == p || isCentroid[c.idx]) continue;
         getDist(c.idx, v, w+c.w);
     }
 }
 
-ll calValidPair(int idx, ll w)
-{
+ll calValidPair(int idx, ll w){
     dist.clear();
     getDist(idx, -1, w);
     sort(dist.begin(), dist.end());
     ll sum = 0;
-    for(int l = 0, r = dist.size()-1; l < r; )
-    {
+    for(int l = 0, r = dist.size()-1; l < r; ){
         if(dist[r]+dist[l] <= k) sum += r-l, l++;
         else r--;
     }
     return sum;
 }
 
-ll treedc(int v)
-{
+ll treedc(int v){
     ll sum = 0;
     // find centroid
     calSubsz(v, v);
@@ -103,8 +91,7 @@ ll treedc(int v)
     return sum;
 }
 
-int main()
-{
+int main(){
     while(scanf("%d %lld", &vn, &k) && vn && k)
     {
         init();

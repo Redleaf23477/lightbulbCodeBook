@@ -1,7 +1,6 @@
 double EPS = 1e-10;
 
-double add(double a, double b)
-{
+double add(double a, double b){
     if(abs(a+b)<EPS*(abs(a)+abs(b)))return 0;
     else return a+b;
 }
@@ -59,35 +58,30 @@ P intersection(seg& lhs, seg& rhs)//p and q Must not be parallel
 bool on_seg(seg& sg, P q)
 {return on_seg(sg.p[0],sg.p[1],q);}
 
-bool overlap(seg s1, seg s2)
-{
+bool overlap(seg s1, seg s2){
     return par(s1,s2)&&
     ( on_seg(s1,s2.p[0])||on_seg(s1,s2.p[1])||
     on_seg(s2,s1.p[0])||on_seg(s2,s1.p[1]) );
 }
 
-bool is_intersect(seg s1, seg s2)
-{
+bool is_intersect(seg s1, seg s2){
     if(par(s1,s2))return false;
     P p0 = intersection(s1,s2);
     return on_seg(s1,p0)&&on_seg(s2,p0);
 }
 
 //make sure the vec is not vertical
-double interpolate(seg& vec, double X)
-{
+double interpolate(seg& vec, double X){
     double y0=vec.p[0].y,y1=vec.p[1].y,
     x0=vec.p[0].x,x1=vec.p[1].x;
     return y0+(y1-y0)*(X-x0)/(x1-x0);
 }
 
 //pts in clockwise order, p[N]=p[0]
-bool in_poly(P* pol,int N,P pt)
-{
+bool in_poly(P* pol,int N,P pt){
     double X = pt.x,Y=pt.y;
     int pas=0;
-    for(int i=0;i<N;i++)
-    {
+    for(int i=0;i<N;i++){
         if(pol[i].x==pol[i+1].x)continue;
         seg s0(pol[i],pol[i+1]);
         //up or down?
@@ -107,13 +101,11 @@ double dpseg(P p, P p1, P p2)//p to p1p2, p1!=p2
     return fabs((p-p1).det(v))/len(v);
 }
 
-double dpseg(P p, seg s1)
-{
+double dpseg(P p, seg s1){
     return dpseg(p,s1.p[0],s1.p[1]);
 }
 
-double dsegseg(P p1, P p2, P p3, P p4)
-{
+double dsegseg(P p1, P p2, P p3, P p4){
     if( is_intersect( seg(p1,p2), seg(p3,p4) ) )return 0;
     return min( min( dpseg(p1,p3,p4),dpseg(p2,p3,p4) ), min( dpseg(p3,p1,p2),dpseg(p4,p1,p2) ) );
 }
