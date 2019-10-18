@@ -5,7 +5,7 @@
 echo 'building list.tex...'
 
 rm a.out
-g++-8 -std=c++11 -O2 GenCodebookList.cpp
+g++ -std=c++11 -O2 GenCodebookList.cpp
 ./a.out
 
 echo 'done'
